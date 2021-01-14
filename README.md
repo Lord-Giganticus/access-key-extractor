@@ -1,5 +1,6 @@
 # Access Key Extractor
 
+* ![Auto Release](https://github.com/Lord-Giganticus/access-key-extractor/workflows/Auto%20Release/badge.svg)
 * ![Python application](https://github.com/Lord-Giganticus/access-key-extractor/workflows/Python%20application/badge.svg)
 * ![CodeQL](https://github.com/Lord-Giganticus/access-key-extractor/workflows/CodeQL/badge.svg)
 
