@@ -1,5 +1,7 @@
 # Access Key Extractor
 
+* ![Python application](https://github.com/Lord-Giganticus/access-key-extractor/workflows/Python%20application/badge.svg)
+
 Extracts server access keys from 3DS and WiiU ROM dumps
 
 ## Usage
