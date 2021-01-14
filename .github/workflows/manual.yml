@@ -22,5 +22,6 @@ jobs:
           prerelease: false
           title: "Latest Build"
           files: |
-            *.py
-            *.js
+            extractor.py
+            extractor.js
+            wiiurpxtool.exe
