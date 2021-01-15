@@ -8,7 +8,7 @@ Extracts server access keys from 3DS and WiiU ROM dumps
 
 ## Usage
 
-`node extractor <path> [packet]`
+`python extractor.py`
 
 ## Arguments
 
