@@ -10,10 +10,10 @@ Extracts server access keys from 3DS and WiiU ROM dumps
 
 `python extractor.py`
 
-## Arguments
+## Extractor.js Arguments
 
-- `path` The path to the game dump (WiiU ROM decompressed ELF or 3DS ROM bin) [Required]
-- `packet` A PRUDP packet to test found access keys against. For simplicity, the packet is expected to be of type SYN [Optional]
+- `node extractor [path]` The path to the game dump (WiiU ROM decompressed ELF or 3DS ROM bin) [Required]
+- `node extractor [path] [packet]` A PRUDP packet to test found access keys against. For simplicity, the packet is expected to be of type SYN [Optional]
 
 ## Notes
 
