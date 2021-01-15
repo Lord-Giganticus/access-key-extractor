@@ -107,6 +107,6 @@ venv.bak/
 _test-roms
 *.elf
 *.rpx
-log.txt
+keys.txt
 sha1.txt
 /temp_dir

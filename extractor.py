@@ -16,7 +16,8 @@ if os.getcwd() != os.path.dirname(__file__):
     print(os.getcwd())
 
 try:
-    os.system('curl.exe --version')
+    os.system('curl.exe --version > output.txt')
+    os.remove('output.txt')
 except:
     print("curl is not installed exiting.")
     time.sleep(5)
@@ -57,14 +58,14 @@ for file in os.listdir(os.getcwd()):
             file_name = os.path.splitext(os.path.basename(file))
             file_name = file_name[0]
             try:
-                log = open('log.txt','a')
-                with open('log.txt') as file:
+                log = open('keys.txt','a')
+                with open('keys.txt') as file:
                     contents = file.read()
                 text = file_name+'.rpx'
                 if text in contents:
                     print('Keys for',file_name+'.rpx already processed. Skipping.')
                     time.sleep(5)
-                    log.close()
+                    file.close()
                 else:
                     log.write('from '+file_name+'.rpx:\n'+key)
                     log.close()
@@ -72,15 +73,15 @@ for file in os.listdir(os.getcwd()):
                 os.remove('output.txt')
                 keys += 1
             except:
-                log = open('log.txt','w')
+                log = open('keys.txt','w')
                 log.write('From '+file_name+'.rpx:\n'+key)
                 log.close()
                 output.close()
                 os.remove('output.txt')
                 keys += 1
 try:
-    open('log.txt')
-    open('log.txt').close()
+    open('keys.txt')
+    open('keys.txt').close()
     print(keys, 'files were proccesed. Getting sha1 dumps.')
 except:
     print('No keys were produced. Exiting.')

@@ -14,7 +14,7 @@ Extracts server access keys from 3DS and WiiU ROM dumps
 ## Usage
 
 - `python extractor.py` (*Note that extractor.py is the only file from releases that must be downloaded. extractor.py checks for the other 3 files and downloads them if they're missing*)
-- If there are rpx/elf files in the script's directory it'll run them though `extractor.js` and outputs results to `log.txt` and `sha1.txt`
+- If there are rpx/elf files in the script's directory it'll run them though `extractor.js` and outputs results to `keys.txt` and `sha1.txt`
 
 ## Extractor.js Arguments
 
