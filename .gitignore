@@ -108,4 +108,5 @@ _test-roms
 *.elf
 *.rpx
 log.txt
+sha1.txt
 /temp_dir

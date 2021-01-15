@@ -25,3 +25,4 @@ jobs:
             extractor.py
             extractor.js
             wiiurpxtool.exe
+            sha1.py
