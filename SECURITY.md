@@ -2,12 +2,11 @@
 
 ## Supported Versions
 
-- Python
-| Version | Supported          |
+
+| Python Version | Supported   |
 | ------- | ------------------ |
 | > 3.1   | :white_check_mark: |
 
-- Node
-| Version | Supported          |
+| Node Version | Supported     |
 | ------- | ------------------ |
 | > = 12.x | :white_check_mark:|
