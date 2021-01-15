@@ -13,7 +13,7 @@ Extracts server access keys from 3DS and WiiU ROM dumps
 
 ## Usage
 
-`python extractor.py` (*note that extractor.py is the only file from releases that must be downloaded the py script checks for the other 3 files and downloaded them if they're missing*)
+`python extractor.py` (*Note that extractor.py is the only file from releases that must be downloaded. extractor.py checks for the other 3 files and downloads them if they're missing*)
 
 ## Extractor.js Arguments
 
