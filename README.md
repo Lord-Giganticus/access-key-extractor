@@ -6,6 +6,11 @@
 
 Extracts server access keys from 3DS and WiiU ROM dumps
 
+## Requirements
+- Node 12.x or higher
+- Python 3.x
+- curl for windows
+
 ## Usage
 
 `python extractor.py`

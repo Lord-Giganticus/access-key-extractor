@@ -20,7 +20,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
-          title: "Latest Build"
+          title: "Latest Build - Only need to download extractor.py"
           files: |
             extractor.py
             extractor.js
