@@ -54,39 +54,41 @@ for file in os.listdir(os.getcwd()):
             os.system('cmd /c node extractor '+os.path.basename(file)+' > output.txt')
             output = open('output.txt','r')
             key = output.readlines()
-            key = key[3]
-            file_name = os.path.splitext(os.path.basename(file))
-            file_name = file_name[0]
-            try:
-                log = open('keys.txt','a')
-                with open('keys.txt') as file:
-                    contents = file.read()
-                text = file_name+'.rpx'
-                if text in contents:
-                    print('Keys for',file_name+'.rpx already processed. Skipping.')
-                    time.sleep(5)
-                    file.close()
-                else:
-                    log.write('from '+file_name+'.rpx:\n'+key)
+            key = key[1]
+            if "No" in key:
+                print('No keys are possible.')
+                output.close()
+                os.remove('output.txt')
+            else:
+                file_name = os.path.splitext(os.path.basename(file))
+                file_name = file_name[0]
+                try:
+                    log = open('keys.txt','a')
+                    with open('keys.txt') as file:
+                        contents = file.read()
+                    if key in contents:
+                        print('Keys for',file_name+'.rpx already processed. Skipping.')
+                        time.sleep(5)
+                        file.close()
+                    else:
+                        log.write('From '+file_name+'.rpx:\n'+key)
+                        log.close()
+                    output.close()
+                    os.remove('output.txt')
+                    keys += 1
+                except:
+                    log = open('keys.txt','w')
+                    log.write('From '+file_name+'.rpx:\n'+key)
                     log.close()
-                output.close()
-                os.remove('output.txt')
-                keys += 1
-            except:
-                log = open('keys.txt','w')
-                log.write('From '+file_name+'.rpx:\n'+key)
-                log.close()
-                output.close()
-                os.remove('output.txt')
-                keys += 1
+                    output.close()
+                    os.remove('output.txt')
+                    keys += 1
 try:
     open('keys.txt')
     open('keys.txt').close()
     print(keys, 'files were proccesed. Getting sha1 dumps.')
 except:
-    print('No keys were produced. Exiting.')
-    time.sleep(5)
-    exit()
+    print('No keys were produced. Getting sha1 dumps.')
 os.chdir('temp_dir')
 for file in os.listdir(os.getcwd()):
     if os.path.isfile(file) == True:
@@ -109,12 +111,13 @@ for file in os.listdir(os.getcwd()):
                         if contents in text:
                             print("sha1 for "+file+' already present. Skipping.')
                             time.sleep(5)
-                            file.close()
+                            f.close()
                             e.close()
                         else:
                             sha1.write('From '+file+':\n'+contents)
                             sha1.close()
                             f.close()
+                            e.close()
                 except:
                     f = open('sha1.txt','w')
                     f.write('From '+file+':\n'+contents)
