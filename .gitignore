@@ -110,3 +110,5 @@ _test-roms
 keys.txt
 sha1.txt
 /temp_dir
+*.json
+data.txt

@@ -1,6 +1,17 @@
 import os
 import time
 import shutil
+import json
+
+def replace_line(file_name, line_num, text):
+    lines = open(file_name, 'r').readlines()
+    lines[line_num] = text
+    out = open(file_name, 'w')
+    out.writelines(lines)
+    out.close()
+
+data = {}
+Games = data['Games'] = []
 
 try:
     os.system('node -v')
@@ -47,6 +58,7 @@ for file in os.listdir(os.getcwd()):
             except:
                 os.mkdir('temp_dir')
             shutil.move(file, 'temp_dir')
+os.system('cmd /c xcopy sha1.py temp_dir')
 time.sleep(2)
 for file in os.listdir(os.getcwd()):
     if os.path.isfile(file) == True:
@@ -54,41 +66,34 @@ for file in os.listdir(os.getcwd()):
             os.system('cmd /c node extractor '+os.path.basename(file)+' > output.txt')
             output = open('output.txt','r')
             key = output.readlines()
-            key = key[1]
-            if "No" in key:
-                print('No keys are possible.')
-                output.close()
-                os.remove('output.txt')
+            check = key[1]
+            key = key[3]
+            output.close()
+            os.remove('output.txt')
+            if check == "No possible access keys found":
+                print('No keys are possible for this file.')
             else:
-                file_name = os.path.splitext(os.path.basename(file))
-                file_name = file_name[0]
-                try:
-                    log = open('keys.txt','a')
-                    with open('keys.txt') as file:
-                        contents = file.read()
-                    if key in contents:
-                        print('Keys for',file_name+'.rpx already processed. Skipping.')
-                        time.sleep(5)
-                        file.close()
-                    else:
-                        log.write('From '+file_name+'.rpx:\n'+key)
-                        log.close()
-                    output.close()
-                    os.remove('output.txt')
-                    keys += 1
-                except:
-                    log = open('keys.txt','w')
-                    log.write('From '+file_name+'.rpx:\n'+key)
-                    log.close()
-                    output.close()
-                    os.remove('output.txt')
-                    keys += 1
-try:
-    open('keys.txt')
-    open('keys.txt').close()
-    print(keys, 'files were proccesed. Getting sha1 dumps.')
-except:
-    print('No keys were produced. Getting sha1 dumps.')
+                os.chdir('temp_dir')
+                for file in os.listdir(os.getcwd()):
+                    if os.path.isfile(file) == True:
+                        if file.endswith('.rpx') == True:
+                            os.system('cmd /c python sha1.py '+file+' > output.txt')
+                            with open('output.txt') as f:
+                                sha1 = f.read()
+                                file_name = os.path.splitext(os.path.basename(file))
+                                file_name = file_name[0]
+                                Games.append({
+                                    'rpx_name':file_name+'.rpx',
+                                    'keys':key,
+                                    'sha1':sha1
+                                })
+                                f.close()
+                                os.remove('output.txt')
+                                os.chdir('../')
+                                with open('keys.json', 'w') as outfile:
+                                    json.dump(data,outfile,indent=2)
+                                keys += 1
+print(keys, 'files were proccesed.')
 os.chdir('temp_dir')
 for file in os.listdir(os.getcwd()):
     if os.path.isfile(file) == True:
@@ -100,29 +105,5 @@ for file in os.listdir(os.getcwd()):
     if os.path.isfile(file) == True:
         if file.endswith('.elf') == True:
             os.remove(file)
-        if file.endswith('.rpx') == True:
-            os.system('cmd /c python -m sha1 '+file+' > output.txt')
-            with open('output.txt') as f:
-                contents = f.read()
-                try:
-                    sha1 = open('sha1.txt','a')
-                    with open('sha1.txt') as e:
-                        text = e.read()
-                        if contents in text:
-                            print("sha1 for "+file+' already present. Skipping.')
-                            time.sleep(5)
-                            f.close()
-                            e.close()
-                        else:
-                            sha1.write('From '+file+':\n'+contents)
-                            sha1.close()
-                            f.close()
-                            e.close()
-                except:
-                    f = open('sha1.txt','w')
-                    f.write('From '+file+':\n'+contents)
-                    f.close()
-            os.remove('output.txt')
-print("Complete. Exiting.")
 time.sleep(5)
 exit()
