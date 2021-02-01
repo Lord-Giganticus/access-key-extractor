@@ -14,9 +14,16 @@ Extracts server access keys from 3DS and WiiU ROM dumps
 ## Usage
 
 - `python extractor.py` (*Note that extractor.py is the only file from releases that must be downloaded. extractor.py checks for the other 3 files and downloads them if they're missing*)
-- If there are rpx/elf files in the script's directory it'll run them though `extractor.js` and outputs results to `keys.txt` and `sha1.txt`
+- If there are rpx/elf files in the script's directory it'll run them though `extractor.js` and outputs results to `keys.json`
 
-## Extractor.js Arguments
+## How it works
+- First, `extractor.py` decompresses all rpx files with wiiurpxtool and move them to `temp_dir`.
+- Then, it calls `extractor.js` to parse the elf roms for access keys. Outputs to `output.txt`
+- `output.txt` is read and checked by python then saves the data to Variable `Games`. Defined as `Games = data['Games'] = []`. Used as `Games.append()`
+- `data` is read and dumped into a json file using `json.dump()`
+- Done!
+
+## extractor.js Arguments
 
 - `node extractor [path]` The path to the game dump (WiiU ROM decompressed ELF or 3DS ROM bin) [Required]
 - `node extractor [path] [packet]` A PRUDP packet to test found access keys against. For simplicity, the packet is expected to be of type SYN [Optional]
