@@ -116,3 +116,5 @@ obj/
 bin/
 .vs/
 .vscode/
+PublishProfiles/
+*.user
