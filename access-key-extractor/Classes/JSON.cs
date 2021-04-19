@@ -30,5 +30,15 @@ namespace access_key_extractor.Classes
             using var reader = new JsonTextReader(sw);
             return serializer.Deserialize(reader);
         }
+
+        internal static Task SerializeAsync(object data, string filePath)
+        {
+            return Task.Run(() => Serialize(data, filePath));
+        }
+
+        internal static Task<object> DeserializeAsync(string path)
+        {
+            return Task.Run(() => Deserialize(path));
+        }
     }
 }

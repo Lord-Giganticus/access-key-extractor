@@ -25,5 +25,10 @@ namespace access_key_extractor.Classes
                 Process.Start(startinfo).WaitForExit();
             }
         }
+
+        internal static Task RunWiiurpxtoolAysnc(List<FileInfo> files)
+        {
+            return Task.Run(() => RunWiiurpxtool(files));
+        }
     }
 }

@@ -36,5 +36,10 @@ namespace access_key_extractor.Classes
             else
                 return lines[3];
         }
+
+        internal static Task<string> RunExtractorAsync(FileInfo file)
+        {
+            return Task.Run(() => RunExtractor(file));
+        }
     }
 }
