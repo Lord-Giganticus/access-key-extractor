@@ -31,7 +31,10 @@ namespace access_key_extractor.Classes
                     lines.Add(process.StandardOutput.ReadLine());
                 else
                     break;
-            return lines[3];
+            if (lines[1] is "No possible access keys found")
+                throw new Exception("No possible access keys found.");
+            else
+                return lines[3];
         }
     }
 }
