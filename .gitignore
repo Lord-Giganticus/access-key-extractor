@@ -112,3 +112,7 @@ sha1.txt
 /temp_dir
 *.json
 data.txt
+obj/
+bin/
+.vs/
+.vscode/
