@@ -1,27 +1,17 @@
 # Access Key Extractor
 
-* ![Auto Release](https://github.com/Lord-Giganticus/access-key-extractor/workflows/Auto%20Release/badge.svg)
-* ![Python application](https://github.com/Lord-Giganticus/access-key-extractor/workflows/Python%20application/badge.svg)
 * ![CodeQL](https://github.com/Lord-Giganticus/access-key-extractor/workflows/CodeQL/badge.svg)
 
 Extracts server access keys from 3DS and WiiU ROM dumps
 
 ## Requirements
 - Node 12.x or higher
-- Python 3.x
-- curl for windows
+- dotnet 5.0 runtime
 
 ## Usage
 
-- `python extractor.py` (*Note that extractor.py is the only file from releases that must be downloaded. extractor.py checks for the other 3 files and downloads them if they're missing*)
-- If there are rpx/elf files in the script's directory it'll run them though `extractor.js` and outputs results to `keys.json`
+- `access-key-extractor.exe`
 
-## How it works
-- First, `extractor.py` decompresses all rpx files with wiiurpxtool and move them to `temp_dir`.
-- Then, it calls `extractor.js` to parse the elf roms for access keys. Outputs to `output.txt`
-- `output.txt` is read and checked by python then saves the data to Variable `Games`. Defined as `Games = data['Games'] = []`. Used as `Games.append()`
-- `data` is read and dumped into a json file using `json.dump()`
-- Done!
 
 ## extractor.js Arguments
 
@@ -30,7 +20,7 @@ Extracts server access keys from 3DS and WiiU ROM dumps
 
 ## Notes
 
-- For extractor.py to work at it's best, copy and paste rpx/elf titles into the folder where you saved extractor.py
+- For access-key-extractor.exe to work at it's best, copy and paste rpx/elf titles into the folder where you saved access-key-extractor.exe
 - Encoding defaults to utf16le, which seems to work for all titles. Has not been tested on every title
 - Access keys are always 8 lowercase characters a-f0-9, except for the Friends server access key. Because of this, this may return multiple possible keys. You may provide a test packet to attempt to find the exact access key, or try all returned possible keys one by one
 - To get the access key for a WiiU title you must first decompress the RPX file in the `code/` folder of the decrypted title into an ELF, then run the extractor on the ELF. See [wiiurpxtool.](https://github.com/0CBH0/wiiurpxtool) I also provided the latest exe in the repo :)
