@@ -42,7 +42,7 @@ namespace access_key_extractor
             foreach (var file in temp_dir.GetFiles())
                 File.Move(file.FullName, $"{dir.FullName}/{file.Name}");
             Directory.SetCurrentDirectory(dir.FullName);
-            Directory.Delete("temp");
+            Directory.Delete("temp", true);
             Console.WriteLine("Complete. Press any key to exit.");
             Console.ReadKey();
         }
