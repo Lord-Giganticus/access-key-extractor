@@ -14,6 +14,9 @@ namespace access_key_extractor
 
         protected internal static async Task MainAsync()
         {
+            Wiiurpxtool.Complete += Wiiurpxtool_Complete;
+            Extractor.Complete += Extractor_Complete;
+            JSON.Complete += JSON_Complete;
             if (!File.Exists("wiiurpxtool.exe"))
                 await File.WriteAllBytesAsync("wiiurpxtool.exe", Resources.wiiurpxtool);
             if (!File.Exists("extractor.js"))
@@ -45,6 +48,21 @@ namespace access_key_extractor
             Directory.Delete("temp", true);
             Console.WriteLine("Complete. Press any key to exit.");
             Console.ReadKey();
+        }
+
+        private static void JSON_Complete()
+        {
+            Console.WriteLine("Data has either been serialized or deserialized successfully.");
+        }
+
+        private static void Extractor_Complete()
+        {
+            Console.WriteLine("Extractor ran successfully.");
+        }
+
+        private static void Wiiurpxtool_Complete()
+        {
+            Console.WriteLine("Rpx tool ran successfully.");
         }
     }
 }

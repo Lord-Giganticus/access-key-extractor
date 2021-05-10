@@ -10,6 +10,8 @@ namespace access_key_extractor.Classes
 {
     internal class JSON
     {
+        internal static event NotifyJson Complete;
+
         internal static void Serialize(object data, string filePath)
         {
             var serializer = new JsonSerializer();
@@ -20,6 +22,7 @@ namespace access_key_extractor.Classes
                 Formatting = Formatting.Indented
             };
             serializer.Serialize(writer, data);
+            Complete?.Invoke();
         }
 
         internal static object Deserialize(string path)
@@ -28,6 +31,7 @@ namespace access_key_extractor.Classes
 
             using var sw = new StreamReader(path);
             using var reader = new JsonTextReader(sw);
+            Complete?.Invoke();
             return serializer.Deserialize(reader);
         }
 
@@ -40,5 +44,7 @@ namespace access_key_extractor.Classes
         {
             return Task.Run(() => Deserialize(path));
         }
+
+        internal delegate void NotifyJson();
     }
 }

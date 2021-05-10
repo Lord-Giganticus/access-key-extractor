@@ -10,6 +10,8 @@ namespace access_key_extractor.Classes
 {
     internal class Wiiurpxtool
     {
+        internal static event NotifyRpxTool Complete;
+
         internal static void RunWiiurpxtool(List<FileInfo> files)
         {
             foreach (var file in files)
@@ -24,11 +26,15 @@ namespace access_key_extractor.Classes
                 };
                 Process.Start(startinfo).WaitForExit();
             }
+            Complete?.Invoke();
         }
 
         internal static Task RunWiiurpxtoolAysnc(List<FileInfo> files)
         {
             return Task.Run(() => RunWiiurpxtool(files));
         }
+
+
+        internal delegate void NotifyRpxTool();
     }
 }
